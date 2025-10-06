@@ -1,9 +1,9 @@
 import { test as base } from '@playwright/test';
-import { LumaAuthPage } from '../../page-objects/luma/auth/lumaAuthPage';
-import {AuthInit} from "../../page-objects/luma/auth/auth.init";
+import { StoreMainPage } from '../../page-objects/store/auth/storeMainPage';
+import {AuthInit} from "../../page-objects/store/auth/auth.init";
 
 interface AuthFixtures {
-    lumaAuthPage: LumaAuthPage;
+    storeMainPage: StoreMainPage;
     authInit: AuthInit
 }
 
@@ -17,7 +17,7 @@ export const test = base.extend<AuthFixtures>({
         { auto: true },
     ],
 
-    lumaAuthPage: async ({ authInit, baseURL }, use) => {
-        await use(new LumaAuthPage(authInit.page, baseURL || 'https://magento.softwaretestingboard.com/customer/account/login'));
+    storeMainPage: async ({ authInit, baseURL }, use) => {
+        await use(new StoreMainPage(authInit.page, baseURL || 'https://automationteststore.com'));
     }
 });

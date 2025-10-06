@@ -31,6 +31,16 @@ export class BaseElement {
         );
     }
 
+    async isVisible(): Promise<void> {
+        await test.step(
+            `Убедиться, что [${this.name}] отображается`,
+            async () => {
+                await this.locator.isVisible();
+            },
+        )
+
+    }
+
     async setFocus(): Promise<void> {
         return this.locator.click();
     }
