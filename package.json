@@ -4,23 +4,22 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc"
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "typescript": "^5.5.3",
-    "@faker-js/faker": "^9.4.0",
-    "@playwright/test": "^1.50.0",
-    "allure-playwright": "^3.0.9",
-    "cross-env": "^7.0.3",
-    "prettier": "^3.4.2"
-  },
-  "scripts": {
     "debugVendorQA": "cross-env ENV=prod npx playwright test --project=Qwintry --debug",
     "eslint:fix": "eslint 'tests/**' --cache --ext .js,.jsx,.ts,.tsx tests --fix",
     "eslint:check": "eslint 'tests/**' --cache --ext .js,.jsx,.ts,.tsx tests",
     "prettier:check": "prettier tests/** --check",
     "prettier:fix": "prettier tests/** --write"
+  },
+  "dependencies": {
+    "playwright": "^1.56.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^9.4.0",
+    "@playwright/test": "^1.56.0",
+    "allure-playwright": "^3.0.9",
+    "cross-env": "^7.0.3",
+    "prettier": "^3.4.2",
+    "typescript": "^5.5.3"
   },
   "private": true
 }

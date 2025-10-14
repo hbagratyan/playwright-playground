@@ -1,8 +1,9 @@
-import { Input } from '../../../locators/input';
 import { Button } from '../../../locators/button';
 import { Page } from '@playwright/test';
 import { Block } from '../../../locators/block';
 import { BasePage } from '../base-page';
+import {Input} from "../../../locators/input";
+import {ne} from "@faker-js/faker";
 
 export class StoreMainPage extends BasePage {
     baseURL: string;
@@ -14,6 +15,14 @@ export class StoreMainPage extends BasePage {
 
     get mainLogo(): Block {
         return new Button(this.page.locator('[title="Automation Test Store"]'), 'Войти');
+    }
+
+    get navBar(): Block {
+        return new Button(this.page.locator('[class*="navbar-collapse"]'), 'Верняя панель навигации');
+    }
+
+    get searchItemInput(): Input {
+        return new Input(this.page.locator("[placeholder='Search Keywords']"), "Поле ввода поиска товаров по названию")
     }
 
     async open(): Promise<void> {
