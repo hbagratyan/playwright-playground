@@ -3,7 +3,6 @@ import { Page } from '@playwright/test';
 import { Block } from '../../../locators/block';
 import { BasePage } from '../base-page';
 import {Input} from "../../../locators/input";
-import {ne} from "@faker-js/faker";
 
 export class StoreMainPage extends BasePage {
     baseURL: string;
@@ -11,6 +10,10 @@ export class StoreMainPage extends BasePage {
     constructor(page: Page, baseURL: string) {
         super(page);
         this.baseURL = baseURL;
+    }
+
+    get accountTopMenuButton(): Button {
+        return new Button(this.page.locator('[id="main_menu_top"] [data-id="menu_account"]'), "Кнопка Аккаунт в верхнем меню")
     }
 
     get mainLogo(): Block {
