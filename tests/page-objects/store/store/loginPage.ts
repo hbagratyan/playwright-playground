@@ -1,6 +1,5 @@
 import {BasePage} from "../base-page";
 import {Page} from "@playwright/test";
-import {Button} from "../../../locators/button";
 import {Block} from "../../../locators/block";
 
 export class LoginPage extends BasePage {

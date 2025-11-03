@@ -16,6 +16,14 @@ export class StoreMainPage extends BasePage {
         return new Button(this.page.locator('[id="main_menu_top"] [data-id="menu_account"]'), "Кнопка Аккаунт в верхнем меню")
     }
 
+    get specialsTopMenuButton(): Button {
+        return new Button(this.page.locator('[id="main_menu_top"] [data-id="menu_specials"]'), "Кнопка Specials в верхнем меню")
+    }
+
+    get cartTopMenuButton(): Button {
+        return new Button(this.page.locator('//*[@id="main_menu_top"]/li[3]/a/span'), "Кнопка Cart в верхнем меню")
+    }
+
     get mainLogo(): Block {
         return new Button(this.page.locator('[title="Automation Test Store"]'), 'Войти');
     }
