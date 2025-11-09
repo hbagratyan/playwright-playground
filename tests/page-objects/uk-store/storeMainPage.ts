@@ -1,8 +1,8 @@
-import { Button } from '../../../locators/button';
+import { Button } from '../../locators/button';
 import { Page } from '@playwright/test';
-import { Block } from '../../../locators/block';
+import { Block } from '../../locators/block';
 import { BasePage } from '../base-page';
-import {Input} from "../../../locators/input";
+import {Input} from "../../locators/input";
 
 export class StoreMainPage extends BasePage {
     baseURL: string;
@@ -25,7 +25,7 @@ export class StoreMainPage extends BasePage {
     }
 
     get mainLogo(): Block {
-        return new Button(this.page.locator('[title="Automation Test Store"]'), 'Войти');
+        return new Button(this.page.locator('[id="_desktop_logo"]'), 'My store logo');
     }
 
     get navBar(): Block {
@@ -34,6 +34,14 @@ export class StoreMainPage extends BasePage {
 
     get searchItemInput(): Input {
         return new Input(this.page.locator("[placeholder='Search Keywords']"), "Поле ввода поиска товаров по названию")
+    }
+
+    get currencyMenuButton(): Button {
+        return new Button(this.page.locator('[class="block_6"]'), "Кнопка Currency, которая открывает меню с валютами")
+    }
+
+    get euroCurrencyMenuButton(): Button {
+        return new Button(this.page.locator(`[class="dropdown-menu currency"]`).getByText("€ Euro"), "Опция Euro в меню валют")
     }
 
     async open(): Promise<void> {

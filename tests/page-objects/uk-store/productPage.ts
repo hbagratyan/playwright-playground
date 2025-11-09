@@ -1,6 +1,6 @@
 import {BasePage} from "../base-page";
 import {Page} from "@playwright/test";
-import {Button} from "../../../locators/button";
+import {Button} from "../../locators/button";
 
 export class ProductPage extends BasePage {
     baseURL: string;

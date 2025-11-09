@@ -1,4 +1,4 @@
-import {test} from '../fixtures/store/store.fixtures';
+import {test} from '../../fixtures/uk-store/store.fixtures';
 
 test.describe('Проверка навигации', () => {
     test.afterEach(async ({storeMainPage}) => {
@@ -18,16 +18,14 @@ test.describe('Проверка навигации', () => {
         await storeMainPage.specialsTopMenuButton.click()
         await specialPage.specialOffersHeader.isVisible()
     });
-});
 
     test('Кнопка Cart работает на панели навигации', async ({storeMainPage, cartPage}) => {
         await storeMainPage.open()
         await storeMainPage.navBar.isVisible()
         await storeMainPage.cartTopMenuButton.click()
         await cartPage.shoppingCartHeader.isVisible()
+    });
 });
-
-
 
 
 

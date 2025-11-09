@@ -1,6 +1,6 @@
 import {BasePage} from "../base-page";
 import {Page} from "@playwright/test";
-import {Block} from "../../../locators/block";
+import {Block} from "../../locators/block";
 
 export class CartPage extends BasePage {
     baseURL: string;
