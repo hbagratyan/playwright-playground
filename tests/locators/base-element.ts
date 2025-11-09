@@ -38,7 +38,6 @@ export class BaseElement {
                 await this.locator.isVisible();
             },
         )
-
     }
 
     async setFocus(): Promise<void> {
