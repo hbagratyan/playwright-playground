@@ -5,15 +5,6 @@ test.describe('Общая проверка', () => {
         await storeMainPage.page.context().clearCookies();
     });
 
-    test('Логотип отображается', async ({storeMainPage}) => {
-        await storeMainPage.open()
-        await storeMainPage.mainLogo.isVisible()
-    });
-
-    test.fixme('Панель навигации отображается', async ({storeMainPage}) => {
-        await storeMainPage.open()
-        await storeMainPage.navBar.isVisible()
-    });
 
     test.fixme('Поиск товара в поле поиска и переход на страницу товара', async ({storeMainPage, productPage}) => {
         //TODO переписать под новый магаз

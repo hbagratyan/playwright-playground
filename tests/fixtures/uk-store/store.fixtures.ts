@@ -12,7 +12,7 @@ interface StoreFixtures {
     loginPage: LoginPage;
     specialPage: SpecialPage;
     cartPage: CartPage;
-    authInit: AuthInit
+    authInit: AuthInit;
 }
 
 export const test = base.extend<StoreFixtures>({
@@ -45,3 +45,5 @@ export const test = base.extend<StoreFixtures>({
         await use(new ProductPage(authInit.page, baseURL || ''));
     },
 });
+
+
