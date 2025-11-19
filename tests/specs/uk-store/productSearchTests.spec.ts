@@ -1,20 +1,61 @@
 import {test} from '../../fixtures/uk-store/store.fixtures';
+import {expect} from "@playwright/test";
 
-test.describe('Общая проверка', () => {
+test.describe('Проверка поиска товаров', () => {
     test.afterEach(async ({storeMainPage}) => {
         await storeMainPage.page.context().clearCookies();
     });
 
-
-    test.fixme('Поиск товара в поле поиска и переход на страницу товара', async ({storeMainPage, productPage}) => {
-        //TODO переписать под новый магаз
-        const itemName = 'Acqua Di Gio Pour Homme'
+    test('Вввод названия товара в поле поиска и выпадение меню результатов поиска', async ({storeMainPage}) => {
+        const itemName = 'Mug'
         await storeMainPage.open()
         await storeMainPage.searchItemInput.fill(itemName)
-        await storeMainPage.page.keyboard.press('Enter')
-        await productPage.descriptionTabHeader.isVisible()
+        await storeMainPage.quickProductSearchResultMenu.isVisible()
+        await storeMainPage.quickProductSearchResultFirstMenuItem
+            .expectToContainText(itemName)
     })
+
+    test('Поиск товара по названию и просмотр релевантных результатов поиска', async ({storeMainPage, searchResultsPage }) => {
+        const itemName = 'Mug'
+        await storeMainPage.open()
+        await storeMainPage.searchItemInput.fill(itemName)
+        await storeMainPage.searchItemInput.pressEnter()
+        await searchResultsPage.firstProductTitle.expectToContainText(itemName)
+    })
+
+    test('Пустое поле поиска товара и просмотр страницы с отсутствием совпадений', async ({storeMainPage, searchResultsPage }) => {
+        await storeMainPage.open()
+        await storeMainPage.searchItemInput.pressEnter()
+        await searchResultsPage.noMatchesFoundHeader.isVisible()
+    })
+
+    test('Поиск отсутствующего товара по названию и просмотр страницы с с отсутствием совпадений', async ({storeMainPage, searchResultsPage }) => {
+        const itemNameIrrelevant = 'Rurururururu'
+        await storeMainPage.open()
+        await storeMainPage.searchItemInput.fill(itemNameIrrelevant)
+        await storeMainPage.searchItemInput.pressEnter()
+        await searchResultsPage.noMatchesFoundHeader.isVisible()
+    })
+
+    test('Поиск товара по имени и сортировка найденных результатов по алфавиту', async ({storeMainPage, searchResultsPage }) => {
+        const itemName = 'Mug';
+        await storeMainPage.open();
+        await storeMainPage.searchItemInput.fill(itemName)
+        await storeMainPage.searchItemInput.pressEnter()
+        await searchResultsPage.searchResultsHeader.isVisible()
+        await searchResultsPage.sortOrderDropdown.click()
+        await searchResultsPage.sortAtoZ.waitForVisibility()
+        await searchResultsPage.sortAtoZ.click()
+        const names = await searchResultsPage.productTitles.allTextContents();
+        expect(names).toEqual([...names].sort());
+        console.log(names);
+    })
+
+
+
+
 });
+
 
 
 

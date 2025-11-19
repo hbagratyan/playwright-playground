@@ -1,5 +1,6 @@
 import {test} from '../../fixtures/uk-store/store.fixtures';
 import {EmailGenerator} from "../../utils/general.helper";
+import {expect} from "@playwright/test";
 
 test.describe('Общая проверка', () => {
     test.afterEach(async ({storeMainPage}) => {
@@ -20,7 +21,6 @@ test.describe('Общая проверка', () => {
         await storeMainPage.open()
         await storeMainPage.clothesMenuButton.hover()
         await storeMainPage.womenClothesSubmenuButton.isVisible()
-
     });
 
     test('Меню с образцами товаров отображается и скроллится', async ({storeMainPage}) => {
@@ -60,19 +60,23 @@ test.describe('Общая проверка', () => {
     });
 
     test('Уведомление о необходимости ввести почту после клика на кнопку Subscribe', async ({storeMainPage}) => {
+        const validationMessage = "Please fill in this field."
         await storeMainPage.open()
         await storeMainPage.subscribeButton.click()
         const validationMsg = await storeMainPage.subscriptionEmailInput.evaluate(
-            (el) => (el as HTMLInputElement).validationMessage
-        );
-    });
+            (el) => (el as HTMLInputElement).validationMessage)
 
-    test('Уведомление о необходимости регистрации появляется при попытки добавить товар в избранное без авторизации', async ({storeMainPage}) => {
-        await storeMainPage.open()
-        await storeMainPage.firstWishlistButton.click()
-        await storeMainPage.signInNotificationButton.isVisible()
+        console.log(validationMsg)
+        expect(validationMsg).toContain(validationMessage)
     });
 });
+
+test('Уведомление о необходимости регистрации появляется при попытки добавить товар в избранное без авторизации', async ({storeMainPage}) => {
+    await storeMainPage.open()
+    await storeMainPage.firstWishlistButton.click()
+    await storeMainPage.signInNotificationButton.isVisible()
+});
+
 
 
 

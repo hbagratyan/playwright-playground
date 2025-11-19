@@ -24,6 +24,7 @@ test.describe('Проверка навигации', () => {
         await storeMainPage.navBar.isVisible()
         await storeMainPage.cartTopMenuButton.click()
         await cartPage.shoppingCartHeader.isVisible()
+        await searchResultsPage.isVisible()
     });
 });
 

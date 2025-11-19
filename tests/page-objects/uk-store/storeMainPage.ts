@@ -3,7 +3,6 @@ import { Page } from '@playwright/test';
 import { Block } from '../../locators/block';
 import { BasePage } from '../base-page';
 import { Input} from "../../locators/input";
-import {th} from "@faker-js/faker";
 
 export class StoreMainPage extends BasePage {
     baseURL: string;
@@ -46,7 +45,7 @@ export class StoreMainPage extends BasePage {
     }
 
     get searchItemInput(): Input {
-        return new Input(this.page.locator("[placeholder='Search Keywords']"), "Поле ввода поиска товаров по названию")
+        return new Input(this.page.locator("[placeholder='Search our catalog']"), "Поле ввода поиска товаров по названию")
     }
 
     get carouselSampleMenuButton(): Button {
@@ -54,15 +53,15 @@ export class StoreMainPage extends BasePage {
     }
 
     get firstCarouselSample(): Button {
-        return new Button(this.page.locator('[class="display-1 text-uppercase"]').getByText("Sample 1"), "Первый образец из карусели")
+        return new Button(this.page.getByText("Sample 1"), "Первый образец из карусели")
     }
 
     get secondCarouselSample(): Button {
-        return new Button(this.page.locator('[class="display-1 text-uppercase"]').getByText("Sample 2"), "Второй образец из карусели")
+        return new Button(this.page.getByText("Sample 2"), "Второй образец из карусели")
     }
 
     get thirdCarouselSample(): Button {
-        return new Button(this.page.locator('[class="display-1 text-uppercase"]').getByText("Sample 3"), "Третий образец из карусели")
+        return new Button(this.page.getByText("Sample 3"), "Третий образец из карусели")
     }
 
     get carouselControlPreviousIconButton(): Button {
@@ -105,7 +104,15 @@ export class StoreMainPage extends BasePage {
         return new Block(this.page.locator('[class*="alert-danger"]').getByText('Invalid email address'), "Оповещение о некорректном емейле")
     }
 
-    async open(): Promise<void> {
+    get quickProductSearchResultMenu(): Button {
+        return new Button(this.page.locator('[class*="searchbar-autocomplete"]'), "Выпадающее меню с результатами поиска товара")
+    }
+
+    get quickProductSearchResultFirstMenuItem():Button {
+    return new Button(this.page.locator('[class="product"]').first(), "Первый найденнный товар из выпадающего меню с результатами поиска товара")
+}
+
+async open(): Promise<void> {
         await this.page.goto(this.baseURL, {waitUntil: "domcontentloaded"});
     }
 }
