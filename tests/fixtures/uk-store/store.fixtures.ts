@@ -5,6 +5,7 @@ import {ProductPage} from "../../page-objects/uk-store/productPage";
 import {LoginPage} from "../../page-objects/uk-store/loginPage";
 import {SpecialPage} from "../../page-objects/uk-store/specialPage";
 import {CartPage} from "../../page-objects/uk-store/cartPage";
+import {SearchResultsPage} from "../../page-objects/uk-store/searchResultsPage";
 
 interface StoreFixtures {
     storeMainPage: StoreMainPage;
@@ -12,7 +13,8 @@ interface StoreFixtures {
     loginPage: LoginPage;
     specialPage: SpecialPage;
     cartPage: CartPage;
-    authInit: AuthInit
+    authInit: AuthInit;
+    searchResultsPage: SearchResultsPage;
 }
 
 export const test = base.extend<StoreFixtures>({
@@ -39,6 +41,10 @@ export const test = base.extend<StoreFixtures>({
 
     cartPage: async ({authInit, baseURL}, use) => {
         await use(new CartPage(authInit.page, baseURL || 'https://teststore.automationtesting.co.uk'));
+    },
+
+    searchResultsPage: async ({authInit, baseURL}, use) => {
+        await use(new SearchResultsPage(authInit.page, baseURL || ''));
     },
 
     productPage: async ({authInit, baseURL}, use) => {

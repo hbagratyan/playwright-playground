@@ -23,11 +23,11 @@ export class BaseElement {
 
     async hover(): Promise<void> {
         await test.step(
-            `Навести курсор на блок [${this.name}]`,
+            `Навести курсор на элемент' [${this.name}]`,
             async () => {
                 await this.locator.hover();
             },
-            { box: true },
+            {box: true},
         );
     }
 
@@ -40,11 +40,37 @@ export class BaseElement {
         )
     }
 
-    async setFocus(): Promise<void> {
-        return this.locator.click();
+    async waitForVisibility(): Promise<void> {
+        await test.step(
+            `Убедиться что [${this.name}] отображается`,
+            async () => {
+                await this.locator.waitFor({
+                    state: 'visible',
+                    timeout: 5000
+                })
+            }
+        )
+    }
+
+    async focus(): Promise<void> {
+        await test.step(
+            `Убедиться что на [${this.name}] установлен фокус`,
+            async () => {
+                await this.locator.focus();
+            },
+        );
     }
 
     async scrollToElementIfNeeded(): Promise<void> {
-        return this.locator.scrollIntoViewIfNeeded();
+        await test.step(
+            `Проскроллить до [${this.name}]`,
+            async () => {
+                await this.locator.scrollIntoViewIfNeeded();
+            },
+        );
+    }
+
+    async evaluate<T>(fn: (el: HTMLElement) => T | Promise<T>): Promise<T> {
+        return this.locator.evaluate(fn);
     }
 }
