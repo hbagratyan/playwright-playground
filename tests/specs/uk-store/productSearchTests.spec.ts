@@ -41,7 +41,7 @@ test.describe('Проверка поиска товаров', () => {
         await storeMainPage.open();
         await storeMainPage.searchItemInput.fill(itemName)
         await storeMainPage.searchItemInput.pressEnter()
-        await searchResultsPage.searchResultsHeader.isVisible()
+        await searchResultsPage.page.waitForLoadState('domcontentloaded')
         await searchResultsPage.sortOrderDropdown.click()
         await searchResultsPage.sortAtoZ.waitForVisibility()
         await searchResultsPage.sortAtoZ.click()

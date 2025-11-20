@@ -33,7 +33,7 @@ export class SearchResultsPage extends BasePage {
     }
 
     get sortOrderDropdown(): Button {
-        return new Button(this.page.locator('[class="col-xs-12 col-sm-12 col-md-9 products-sort-order dropdown"]'), "Меню сортировки")
+        return new Button(this.page.getByRole('button', { name: 'Sort by selection' }), "Меню сортировки")
     }
 
     get sortAtoZ(): Button {

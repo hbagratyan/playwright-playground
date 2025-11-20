@@ -73,5 +73,4 @@ export class BaseElement {
     async evaluate<T>(fn: (el: HTMLElement) => T | Promise<T>): Promise<T> {
         return this.locator.evaluate(fn);
     }
-
 }
