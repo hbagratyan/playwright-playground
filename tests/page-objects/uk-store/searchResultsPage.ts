@@ -24,8 +24,8 @@ export class SearchResultsPage extends BasePage {
         return new Button(this.page.locator('[class*="product-thumbnail"]').first(), "Первая карточка в секции найденных товаров")
     }
 
-    get firstProductTitle(): Button {
-        return new Button(this.page.locator('[class="h3 product-title"]').first(), "Название первого из найденных товаров")
+    nthProductTitle(index: number): Button {
+        return new Button(this.page.locator('[class="h3 product-title"]').nth(1), `Название ${index} из найденных товаров`)
     }
 
     get noMatchesFoundHeader(): Block {

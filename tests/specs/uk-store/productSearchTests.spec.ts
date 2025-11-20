@@ -11,8 +11,7 @@ test.describe('Проверка поиска товаров', () => {
         await storeMainPage.open()
         await storeMainPage.searchItemInput.fill(itemName)
         await storeMainPage.quickProductSearchResultMenu.isVisible()
-        await storeMainPage.quickProductSearchResultFirstMenuItem
-            .expectToContainText(itemName)
+        await expect(storeMainPage.quickProductSearchResultFirstMenuItem.getLocator).toContainText(itemName, {ignoreCase: true})
     })
 
     test('Поиск товара по названию и просмотр релевантных результатов поиска', async ({storeMainPage, searchResultsPage }) => {
@@ -20,7 +19,7 @@ test.describe('Проверка поиска товаров', () => {
         await storeMainPage.open()
         await storeMainPage.searchItemInput.fill(itemName)
         await storeMainPage.searchItemInput.pressEnter()
-        await searchResultsPage.firstProductTitle.expectToContainText(itemName)
+        await expect(searchResultsPage.nthProductTitle(1).getLocator).toContainText(itemName, {ignoreCase: true})
     })
 
     test('Пустое поле поиска товара и просмотр страницы с отсутствием совпадений', async ({storeMainPage, searchResultsPage }) => {

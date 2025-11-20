@@ -1,6 +1,5 @@
 import { Locator, test } from '@playwright/test';
 import { BaseElement } from './base-element';
-import {expect} from "@playwright/test";
 
 export class Button extends BaseElement {
     constructor(locator: Locator, name: string) {
@@ -44,11 +43,6 @@ export class Button extends BaseElement {
             },
             { box: true },
         );
-    }
-
-    async expectToContainText(text: string) {
-        const regex = new RegExp(text, "i");
-        await expect(this.locator).toContainText(regex);
     }
 }
 
