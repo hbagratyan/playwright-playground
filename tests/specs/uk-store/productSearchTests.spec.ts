@@ -41,18 +41,16 @@ test.describe('Проверка поиска товаров', () => {
         await storeMainPage.open();
         await storeMainPage.searchItemInput.fill(itemName)
         await storeMainPage.searchItemInput.pressEnter()
-        await searchResultsPage.page.waitForLoadState('domcontentloaded')
+        await searchResultsPage.page.waitForLoadState('networkidle')
         await searchResultsPage.sortOrderDropdown.click()
         await searchResultsPage.sortAtoZ.waitForVisibility()
-        await searchResultsPage.sortAtoZ.click()
+        await Promise.all([
+            searchResultsPage.sortAtoZ.click(),
+            searchResultsPage.page.waitForResponse(resp => resp.url().includes('product.name.asc') && resp.status() === 200)
+        ]);
         const names = await searchResultsPage.productTitles.allTextContents();
         expect(names).toEqual([...names].sort());
-        console.log(names);
     })
-
-
-
-
 });
 
 
