@@ -6,6 +6,9 @@ import {LoginPage} from "../../page-objects/uk-store/loginPage";
 import {SpecialPage} from "../../page-objects/uk-store/specialPage";
 import {CartPage} from "../../page-objects/uk-store/cartPage";
 import {SearchResultsPage} from "../../page-objects/uk-store/searchResultsPage";
+import {SignInPage} from "../../page-objects/uk-store/signInPage";
+import {MyAccountPage} from "../../page-objects/uk-store/myAccountPage";
+import {CreateAccountPage} from "../../page-objects/uk-store/createAccountPage";
 
 interface StoreFixtures {
     storeMainPage: StoreMainPage;
@@ -15,6 +18,9 @@ interface StoreFixtures {
     cartPage: CartPage;
     authInit: AuthInit;
     searchResultsPage: SearchResultsPage;
+    signInPage: SignInPage;
+    myAccountPage: MyAccountPage;
+    createAccountPage: CreateAccountPage;
 }
 
 export const test = base.extend<StoreFixtures>({
@@ -44,10 +50,22 @@ export const test = base.extend<StoreFixtures>({
     },
 
     searchResultsPage: async ({authInit, baseURL}, use) => {
-        await use(new SearchResultsPage(authInit.page, baseURL || ''));
+        await use(new SearchResultsPage(authInit.page, baseURL || 'https://teststore.automationtesting.co.uk'));
     },
 
     productPage: async ({authInit, baseURL}, use) => {
-        await use(new ProductPage(authInit.page, baseURL || ''));
+        await use(new ProductPage(authInit.page, baseURL || 'https://teststore.automationtesting.co.uk'));
     },
+
+    signInPage: async ({authInit, baseURL}, use) => {
+        await use(new SignInPage(authInit.page, baseURL || 'https://teststore.automationtesting.co.uk'));
+    },
+
+    myAccountPage: async ({authInit, baseURL}, use) => {
+        await use(new MyAccountPage(authInit.page, baseURL || 'https://teststore.automationtesting.co.uk'));
+    },
+
+    createAccountPage: async ({authInit, baseURL}, use) => {
+        await use(new CreateAccountPage(authInit.page, baseURL || 'https://teststore.automationtesting.co.uk'));
+    }
 });
