@@ -110,7 +110,6 @@ test.describe('Проверка авторизации пользователя'
         await myAccountPage.yourAccountHeader.isVisible()
     });
 
-
     test('Новый пользователь с уже существующим емейлом не создается', async ({storeMainPage, signInPage, createAccountPage}) => {
         await storeMainPage.open()
         await storeMainPage.signInButton.click()
