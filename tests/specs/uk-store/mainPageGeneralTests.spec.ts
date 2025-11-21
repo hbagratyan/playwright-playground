@@ -1,5 +1,5 @@
 import {test} from '../../fixtures/uk-store/store.fixtures';
-import {EmailGenerator} from "../../utils/general.helper";
+import {EmailGenerator} from "../../utils/email.helper";
 import {expect} from "@playwright/test";
 
 test.describe('Общая проверка', () => {
@@ -69,13 +69,15 @@ test.describe('Общая проверка', () => {
         console.log(validationMsg)
         expect(validationMsg).toContain(validationMessage)
     });
+
+    test('Уведомление о необходимости регистрации появляется при попытки добавить товар в избранное без авторизации', async ({storeMainPage}) => {
+        await storeMainPage.open()
+        await storeMainPage.firstWishlistButton.click()
+        await storeMainPage.signInNotificationButton.isVisible()
+    });
 });
 
-test('Уведомление о необходимости регистрации появляется при попытки добавить товар в избранное без авторизации', async ({storeMainPage}) => {
-    await storeMainPage.open()
-    await storeMainPage.firstWishlistButton.click()
-    await storeMainPage.signInNotificationButton.isVisible()
-});
+
 
 
 

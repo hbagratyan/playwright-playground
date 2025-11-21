@@ -109,10 +109,22 @@ export class StoreMainPage extends BasePage {
     }
 
     get quickProductSearchResultFirstMenuItem():Button {
-    return new Button(this.page.locator('[class="product"]').first(), "Первый найденнный товар из выпадающего меню с результатами поиска товара")
-}
+        return new Button(this.page.locator('[class="product"]').first(), "Первый найденнный товар из выпадающего меню с результатами поиска товара")
+    }
 
-async open(): Promise<void> {
+    get signInButton(): Button {
+        return new Button(this.page.locator('[class="hidden-sm-down"]').getByText('Sign In'), "Кнопка Sign in на главной странице")
+    }
+
+    get signOutButton(): Button {
+        return new Button(this.page.locator('[class*="logout"]'), "Кнопка Sign out на главной странице")
+    }
+
+    accountNameButton(accountName: string): Button {
+        return new Button(this.page.locator('[class="account"]').getByText(accountName), "Кнопка имени аккаунта на главной странице")
+    }
+
+    async open(): Promise<void> {
         await this.page.goto(this.baseURL, {waitUntil: "domcontentloaded"});
     }
 }

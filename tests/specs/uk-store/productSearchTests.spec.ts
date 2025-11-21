@@ -45,8 +45,8 @@ test.describe('Проверка поиска товаров', () => {
         await searchResultsPage.sortOrderDropdown.click()
         await searchResultsPage.sortAtoZ.waitForVisibility()
         await Promise.all([
-            searchResultsPage.sortAtoZ.click(),
-            searchResultsPage.page.waitForResponse(resp => resp.url().includes('product.name.asc') && resp.status() === 200)
+            searchResultsPage.page.waitForResponse(resp => resp.url().includes('product.name.asc') && resp.status() === 200),
+            searchResultsPage.sortAtoZ.click()
         ]);
         const names = await searchResultsPage.productTitles.allTextContents();
         expect(names).toEqual([...names].sort());
